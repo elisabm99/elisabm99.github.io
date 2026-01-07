@@ -4,82 +4,257 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Your Name</title>
-  <meta name="description" content="Bio and research page for Your Name." />
+  <meta name="description" content="Researcher website for Your Name." />
+
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; line-height: 1.6; }
-    .wrap { max-width: 900px; margin: 0 auto; padding: 48px 20px; }
-    header { margin-bottom: 28px; }
-    h1 { margin: 0 0 6px; }
-    nav a { margin-right: 12px; }
-    section { margin: 34px 0; }
-    .muted { opacity: 0.75; }
-    ul { padding-left: 18px; }
-    .card { padding: 14px 16px; border: 1px solid #ddd; border-radius: 12px; margin: 10px 0; }
+    :root{
+      --bg: #0b1020;
+      --bg2:#0a142e;
+      --card:#101a33;
+      --text:#eaf0ff;
+      --muted:#b7c4ea;
+      --border: rgba(234,240,255,.14);
+      --accent:#7aa2ff;
+      --accent2:#7ff0d6;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 980px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f8ff;
+        --bg2:#eef2ff;
+        --card:#ffffff;
+        --text:#0c1222;
+        --muted:#4b5878;
+        --border: rgba(12,18,34,.12);
+        --accent:#2f5bff;
+        --accent2:#0aa37f;
+        --shadow: 0 10px 30px rgba(10,20,40,.10);
+      }
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.6;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 500px at 20% 0%, rgba(122,162,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(127,240,214,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    a:focus{ outline: 3px solid rgba(122,162,255,.45); outline-offset: 3px; border-radius:10px; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 28px 18px 60px; }
+    .skip{
+      position:absolute; left:-999px; top:8px;
+      padding:10px 12px; background:var(--card); border:1px solid var(--border); border-radius:12px;
+    }
+    .skip:focus{ left: 18px; z-index: 999; }
+
+    .hero{
+      border:1px solid var(--border);
+      border-radius: calc(var(--radius) + 8px);
+      background: linear-gradient(135deg, rgba(122,162,255,.18), rgba(127,240,214,.10));
+      box-shadow: var(--shadow);
+      padding: 26px 20px;
+      margin-top: 10px;
+    }
+    .hero-top{
+      display:flex; gap:18px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .id{
+      display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+    }
+    .avatar{
+      width:72px; height:72px; border-radius: 18px;
+      object-fit:cover; border:1px solid var(--border);
+      background: rgba(255,255,255,.08);
+    }
+    h1{ margin:0; font-size: clamp(28px, 3.2vw, 40px); letter-spacing:-.02em; }
+    .subtitle{ color:var(--muted); margin-top:4px; }
+    .pillrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{ background: rgba(255,255,255,.10); text-decoration:none; }
+
+    nav{
+      margin-top: 16px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    nav a{
+      padding:8px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+    nav a:hover{ text-decoration:none; background: rgba(255,255,255,.10); }
+
+    main{ margin-top: 22px; display:grid; gap: 16px; }
+    section{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.12);
+    }
+    h2{ margin:0 0 10px; font-size: 18px; letter-spacing:.01em; }
+    .muted{ color: var(--muted); }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .col6{ grid-column: span 6; }
+    .col12{ grid-column: span 12; }
+    @media (max-width: 820px){
+      .col6{ grid-column: span 12; }
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 14px;
+      background: rgba(255,255,255,.04);
+    }
+    .card strong{ display:block; margin-bottom:6px; }
+    ul{ margin: 10px 0 0; padding-left: 18px; }
+    li{ margin: 8px 0; }
+    .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(122,162,255,.18);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 600;
+    }
+    .btn.secondary{ background: rgba(255,255,255,.06); font-weight: 600; }
+    .btn:hover{ text-decoration:none; filter: brightness(1.05); }
+
+    footer{
+      margin-top: 18px;
+      color: var(--muted);
+      text-align:center;
+      font-size: 14px;
+    }
+    .hr{
+      height:1px; background: var(--border); border:0; margin: 14px 0;
+    }
   </style>
 </head>
+
 <body>
+  <a class="skip" href="#content">Skip to content</a>
+
   <div class="wrap">
-    <header>
-      <h1>Your Name</h1>
-      <div class="muted">Title · Department · University</div>
-      <p>
-        <a href="mailto:you@university.edu">you@university.edu</a> ·
-        <a href="https://scholar.google.com/">Google Scholar</a> ·
-        <a href="https://orcid.org/">ORCID</a> ·
-        <a href="https://github.com/">GitHub</a>
-      </p>
-      <nav>
-        <a href="#bio">Bio</a>
-        <a href="#research">Research</a>
-        <a href="#publications">Publications</a>
-        <a href="#teaching">Teaching</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <header class="hero">
+      <div class="hero-top">
+        <div class="id">
+          <!-- Optional: add a headshot file at assets/headshot.jpg and uncomment next line -->
+          <!-- <img class="avatar" src="assets/headshot.jpg" alt="Your Name headshot"> -->
+          <div>
+            <h1>Your Name</h1>
+            <div class="subtitle">Title · Department · University</div>
+            <div class="pillrow">
+              <a class="pill" href="mailto:you@university.edu">you@university.edu</a>
+              <a class="pill" href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a>
+              <a class="pill" href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a>
+              <a class="pill" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+            <div class="btnrow">
+              <!-- Put cv.pdf in the repo root to enable this -->
+              <a class="btn" href="cv.pdf">Download CV</a>
+              <a class="btn secondary" href="#publications">Selected papers</a>
+            </div>
+          </div>
+        </div>
+
+        <nav aria-label="Site">
+          <a href="#about">About</a>
+          <a href="#research">Research</a>
+          <a href="#publications">Publications</a>
+          <a href="#teaching">Teaching</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
     </header>
 
-    <section id="bio">
-      <h2>Bio</h2>
-      <p>Write a short bio here (2–5 sentences). Mention your role, interests, and what you work on.</p>
-    </section>
+    <main id="content">
+      <section id="about">
+        <h2>About</h2>
+        <p class="muted">
+          Write 3–6 sentences about who you are, what you study, and your methods. Keep it human and specific.
+        </p>
+      </section>
 
-    <section id="research">
-      <h2>Research</h2>
-      <div class="card">
-        <strong>Theme / Project A</strong>
-        <div class="muted">1–2 lines describing what you’re studying and why it matters.</div>
-      </div>
-      <div class="card">
-        <strong>Theme / Project B</strong>
-        <div class="muted">Add another research area or project summary.</div>
-      </div>
-    </section>
+      <section id="research">
+        <h2>Research</h2>
+        <div class="grid">
+          <div class="card col6">
+            <strong>Research Area / Project A</strong>
+            <div class="muted">2–4 lines: problem → approach → why it matters → (optional) key result.</div>
+          </div>
+          <div class="card col6">
+            <strong>Research Area / Project B</strong>
+            <div class="muted">2–4 lines.</div>
+          </div>
+          <div class="card col12">
+            <strong>Research Area / Project C (optional)</strong>
+            <div class="muted">1–3 lines.</div>
+          </div>
+        </div>
+      </section>
 
-    <section id="publications">
-      <h2>Selected publications</h2>
-      <ul>
-        <li>Author, A., Author, B. (Year). Paper title. <em>Venue</em>. <a href="#">PDF</a> · <a href="#">Code</a></li>
-        <li>Author, A. (Year). Paper title. <em>Venue</em>. <a href="#">DOI</a></li>
-      </ul>
-    </section>
+      <section id="publications">
+        <h2>Selected publications</h2>
+        <ul>
+          <li><strong>Author, A.</strong> (Year). Paper title. <em>Venue</em>. <a href="#">PDF</a> · <a href="#">DOI</a> · <a href="#">Code</a></li>
+          <li><strong>Author, A.</strong> (Year). Paper title. <em>Venue</em>. <a href="#">PDF</a></li>
+        </ul>
+        <hr class="hr" />
+        <p class="muted">Tip: keep this list short (5–12). Link the rest on Google Scholar.</p>
+      </section>
 
-    <section id="teaching">
-      <h2>Teaching</h2>
-      <ul>
-        <li>Course Name (Term, Year) — Role</li>
-      </ul>
-    </section>
+      <section id="teaching">
+        <h2>Teaching</h2>
+        <ul>
+          <li>Course Name (Term, Year) — Role</li>
+          <li>Course Name (Term, Year) — Role</li>
+        </ul>
+      </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:you@university.edu">you@university.edu</a></p>
-      <p>Office: Building, Room · City, State</p>
-    </section>
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:you@university.edu">you@university.edu</a></p>
+        <p class="muted">Office: Building, Room · City, Country</p>
+      </section>
 
-    <footer class="muted">
-      <hr />
-      <div>© <span id="y"></span> Your Name</div>
-    </footer>
+      <footer>
+        <hr class="hr" />
+        © <span id="y"></span> Your Name
+      </footer>
+    </main>
   </div>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
