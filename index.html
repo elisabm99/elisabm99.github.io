@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name</title>
+  <meta name="description" content="Bio and research page for Your Name." />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; line-height: 1.6; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 48px 20px; }
+    header { margin-bottom: 28px; }
+    h1 { margin: 0 0 6px; }
+    nav a { margin-right: 12px; }
+    section { margin: 34px 0; }
+    .muted { opacity: 0.75; }
+    ul { padding-left: 18px; }
+    .card { padding: 14px 16px; border: 1px solid #ddd; border-radius: 12px; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Your Name</h1>
+      <div class="muted">Title · Department · University</div>
+      <p>
+        <a href="mailto:you@university.edu">you@university.edu</a> ·
+        <a href="https://scholar.google.com/">Google Scholar</a> ·
+        <a href="https://orcid.org/">ORCID</a> ·
+        <a href="https://github.com/">GitHub</a>
+      </p>
+      <nav>
+        <a href="#bio">Bio</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section id="bio">
+      <h2>Bio</h2>
+      <p>Write a short bio here (2–5 sentences). Mention your role, interests, and what you work on.</p>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <div class="card">
+        <strong>Theme / Project A</strong>
+        <div class="muted">1–2 lines describing what you’re studying and why it matters.</div>
+      </div>
+      <div class="card">
+        <strong>Theme / Project B</strong>
+        <div class="muted">Add another research area or project summary.</div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2>Selected publications</h2>
+      <ul>
+        <li>Author, A., Author, B. (Year). Paper title. <em>Venue</em>. <a href="#">PDF</a> · <a href="#">Code</a></li>
+        <li>Author, A. (Year). Paper title. <em>Venue</em>. <a href="#">DOI</a></li>
+      </ul>
+    </section>
+
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <ul>
+        <li>Course Name (Term, Year) — Role</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:you@university.edu">you@university.edu</a></p>
+      <p>Office: Building, Room · City, State</p>
+    </section>
+
+    <footer class="muted">
+      <hr />
+      <div>© <span id="y"></span> Your Name</div>
+    </footer>
+  </div>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
