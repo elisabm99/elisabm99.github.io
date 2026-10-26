@@ -1,0 +1,174 @@
+/* Colors: edit these to restyle the whole site. */
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --muted: #5f6670;
+  --border: #e4e1da;
+  --accent: #2b5d8a;
+  --accent-soft: #e8eff6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a;
+    --surface: #1d2024;
+    --text: #e6e6e3;
+    --muted: #9aa0a6;
+    --border: #2e3237;
+    --accent: #8cb8e0;
+    --accent-soft: #22303d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+.wrap { max-width: 46rem; margin: 0 auto; padding: 0 1rem; }
+
+/* Navigation bar */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.25rem 1rem; padding-top: 0.75rem; padding-bottom: 0.75rem;
+  font-family: Inter, system-ui, sans-serif; font-size: 0.9rem;
+}
+.nav-name { font-weight: 600; color: var(--text); text-decoration: none; }
+.nav-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a { color: var(--muted); text-decoration: none; }
+.nav-links a:hover { color: var(--accent); }
+
+/* Intro */
+.intro {
+  display: grid; grid-template-columns: 9rem 1fr; gap: 2rem; align-items: start;
+  padding: 3.5rem 0 1rem;
+}
+.photo {
+  width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover;
+  background: var(--accent-soft); color: var(--accent);
+  display: grid; place-items: center;
+  font-family: Inter, system-ui, sans-serif; font-size: 2.25rem; font-weight: 600;
+}
+h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 0.25rem; font-weight: 600; }
+.intro p { margin: 0 0 0.75rem; }
+.intro .position {
+  margin: 0 0 1rem; line-height: 1.5; color: var(--muted);
+  font-family: Inter, system-ui, sans-serif; font-size: 0.95rem;
+}
+.links {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 1.25rem 0 0;
+  font-family: Inter, system-ui, sans-serif; font-size: 0.85rem;
+}
+.links a {
+  display: inline-block; padding: 0.3rem 0.75rem; border: 1px solid var(--border);
+  border-radius: 999px; text-decoration: none; background: var(--surface);
+}
+.links a:hover { border-color: var(--accent); }
+
+/* Sections */
+section { padding: 2rem 0; }
+h2 {
+  font-family: Inter, system-ui, sans-serif; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  margin: 0 0 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+}
+h3 { font-size: 1.15rem; margin: 0 0 0.35rem; font-weight: 600; }
+.note { color: var(--muted); font-size: 1rem; margin-top: -0.5rem; }
+
+/* Research topics */
+.vision {
+  font-size: 1.2rem; line-height: 1.6; margin: 0 0 2.25rem;
+  padding-left: 1.1rem; border-left: 3px solid var(--accent);
+}
+.topic {
+  display: grid; grid-template-columns: 15rem 1fr; gap: 1.5rem; align-items: start;
+  margin-bottom: 2.25rem;
+}
+.topic-fig { margin: 0; }
+.topic-fig img {
+  width: 100%; height: auto; display: block; background: #fff;
+  border: 1px solid var(--border); border-radius: 6px;
+}
+.topic-fig figcaption {
+  margin-top: 0.4rem; color: var(--muted); font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem; line-height: 1.45;
+}
+.topic p { margin: 0; }
+.key-papers {
+  margin-top: 0.4rem !important; font-family: Inter, system-ui, sans-serif; font-size: 0.85rem;
+  color: var(--muted); line-height: 1.7;
+}
+.key-papers::before { content: "Key papers: "; font-weight: 500; }
+
+/* Publications */
+.pubs { padding-left: 1.75rem; margin: 0; }
+.pubs li { margin-bottom: 1.1rem; padding-left: 0.25rem; }
+.pubs li::marker { color: var(--muted); font-family: Inter, system-ui, sans-serif; font-size: 0.85rem; }
+.pub-group {
+  font-family: Inter, system-ui, sans-serif; font-size: 0.95rem; font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+.pub-title { display: block; font-weight: 600; color: var(--text); text-decoration: none; }
+a.pub-title:hover { color: var(--accent); text-decoration: underline; }
+.pub-authors, .pub-venue { display: block; font-size: 1rem; color: var(--muted); }
+.pub-authors strong { color: var(--text); font-weight: 600; }
+
+/* Talks */
+.talks { list-style: none; padding: 0; margin: 0; }
+.talks li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; margin-bottom: 0.9rem; line-height: 1.5; }
+.tag {
+  display: inline-block; margin-left: 0.25rem; padding: 0 0.45rem; border-radius: 4px;
+  background: var(--accent-soft); color: var(--accent);
+  font-family: Inter, system-ui, sans-serif; font-size: 0.72rem; vertical-align: 0.1em;
+}
+.date, .label {
+  color: var(--muted); font-family: Inter, system-ui, sans-serif; font-size: 0.85rem; padding-top: 0.2rem;
+}
+.label { display: inline-block; width: 4.5rem; }
+
+/* Outside physics */
+.aside-photo {
+  display: grid; grid-template-columns: 15rem 1fr; gap: 1.5rem; align-items: center; margin: 0;
+}
+.aside-photo img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.aside-photo figcaption { color: var(--muted); font-style: italic; }
+.wide-photo { margin: 1.5rem 0 2rem; }
+.wide-photo img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.wide-photo figcaption { color: var(--muted); font-style: italic; font-size: 1rem; margin-top: 0.5rem; }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1rem; padding-bottom: 2rem;
+  color: var(--muted); font-family: Inter, system-ui, sans-serif; font-size: 0.8rem;
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  body { font-size: 1.05rem; }
+  .intro { grid-template-columns: 1fr; gap: 1.25rem; padding-top: 2rem; }
+  .photo { width: 7rem; height: 7rem; font-size: 1.8rem; }
+  h1 { font-size: 2rem; }
+  .talks li { grid-template-columns: 1fr; gap: 0; margin-bottom: 0.9rem; }
+  .aside-photo { grid-template-columns: 1fr; gap: 0.75rem; }
+  .topic { grid-template-columns: 1fr; gap: 0.75rem; }
+  .topic-fig { max-width: 26rem; }
+}

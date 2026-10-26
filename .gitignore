@@ -1,0 +1,7 @@
+# Private / working files: never published
+_sources/
+_photos/
+pic.jpeg
+Photos-*.zip
+.claude/
+.DS_Store

@@ -1,260 +1,424 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Name</title>
-  <meta name="description" content="Researcher website for Your Name." />
-
-  <style>
-    :root{
-      --bg: #0b1020;
-      --bg2:#0a142e;
-      --card:#101a33;
-      --text:#eaf0ff;
-      --muted:#b7c4ea;
-      --border: rgba(234,240,255,.14);
-      --accent:#7aa2ff;
-      --accent2:#7ff0d6;
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
-      --radius: 18px;
-      --max: 980px;
-    }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f6f8ff;
-        --bg2:#eef2ff;
-        --card:#ffffff;
-        --text:#0c1222;
-        --muted:#4b5878;
-        --border: rgba(12,18,34,.12);
-        --accent:#2f5bff;
-        --accent2:#0aa37f;
-        --shadow: 0 10px 30px rgba(10,20,40,.10);
-      }
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      line-height:1.6;
-      color:var(--text);
-      background:
-        radial-gradient(1100px 500px at 20% 0%, rgba(122,162,255,.25), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(127,240,214,.18), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-    }
-    a{ color:var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-    a:focus{ outline: 3px solid rgba(122,162,255,.45); outline-offset: 3px; border-radius:10px; }
-
-    .wrap{ max-width:var(--max); margin:0 auto; padding: 28px 18px 60px; }
-    .skip{
-      position:absolute; left:-999px; top:8px;
-      padding:10px 12px; background:var(--card); border:1px solid var(--border); border-radius:12px;
-    }
-    .skip:focus{ left: 18px; z-index: 999; }
-
-    .hero{
-      border:1px solid var(--border);
-      border-radius: calc(var(--radius) + 8px);
-      background: linear-gradient(135deg, rgba(122,162,255,.18), rgba(127,240,214,.10));
-      box-shadow: var(--shadow);
-      padding: 26px 20px;
-      margin-top: 10px;
-    }
-    .hero-top{
-      display:flex; gap:18px; align-items:center; justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .id{
-      display:flex; gap:16px; align-items:center; flex-wrap:wrap;
-    }
-    .avatar{
-      width:72px; height:72px; border-radius: 18px;
-      object-fit:cover; border:1px solid var(--border);
-      background: rgba(255,255,255,.08);
-    }
-    h1{ margin:0; font-size: clamp(28px, 3.2vw, 40px); letter-spacing:-.02em; }
-    .subtitle{ color:var(--muted); margin-top:4px; }
-    .pillrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px;
-      border:1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      text-decoration:none;
-    }
-    .pill:hover{ background: rgba(255,255,255,.10); text-decoration:none; }
-
-    nav{
-      margin-top: 16px;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    nav a{
-      padding:8px 12px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-    }
-    nav a:hover{ text-decoration:none; background: rgba(255,255,255,.10); }
-
-    main{ margin-top: 22px; display:grid; gap: 16px; }
-    section{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 18px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.12);
-    }
-    h2{ margin:0 0 10px; font-size: 18px; letter-spacing:.01em; }
-    .muted{ color: var(--muted); }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-    }
-    .col6{ grid-column: span 6; }
-    .col12{ grid-column: span 12; }
-    @media (max-width: 820px){
-      .col6{ grid-column: span 12; }
-    }
-
-    .card{
-      border:1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 14px;
-      background: rgba(255,255,255,.04);
-    }
-    .card strong{ display:block; margin-bottom:6px; }
-    ul{ margin: 10px 0 0; padding-left: 18px; }
-    li{ margin: 8px 0; }
-    .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid var(--border);
-      background: rgba(122,162,255,.18);
-      color: var(--text);
-      text-decoration:none;
-      font-weight: 600;
-    }
-    .btn.secondary{ background: rgba(255,255,255,.06); font-weight: 600; }
-    .btn:hover{ text-decoration:none; filter: brightness(1.05); }
-
-    footer{
-      margin-top: 18px;
-      color: var(--muted);
-      text-align:center;
-      font-size: 14px;
-    }
-    .hr{
-      height:1px; background: var(--border); border:0; margin: 14px 0;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elisa Todarello</title>
+  <meta name="description" content="Elisa Todarello — theoretical astroparticle physicist working on axions and ultralight dark matter. Postdoctoral Fellow at UC Berkeley and Marie Skłodowska-Curie Fellow at the University of Turin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav">
+      <a class="nav-name" href="#top">Elisa Todarello</a>
+      <ul class="nav-links">
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#talks">Talks</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <div class="wrap">
-    <header class="hero">
-      <div class="hero-top">
-        <div class="id">
-          <!-- Optional: add a headshot file at assets/headshot.jpg and uncomment next line -->
-          <!-- <img class="avatar" src="assets/headshot.jpg" alt="Your Name headshot"> -->
-          <div>
-            <h1>Your Name</h1>
-            <div class="subtitle">Title · Department · University</div>
-            <div class="pillrow">
-              <a class="pill" href="mailto:you@university.edu">you@university.edu</a>
-              <a class="pill" href="https://scholar.google.com/" target="_blank" rel="noreferrer">Google Scholar</a>
-              <a class="pill" href="https://orcid.org/" target="_blank" rel="noreferrer">ORCID</a>
-              <a class="pill" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-            </div>
-            <div class="btnrow">
-              <!-- Put cv.pdf in the repo root to enable this -->
-              <a class="btn" href="cv.pdf">Download CV</a>
-              <a class="btn secondary" href="#publications">Selected papers</a>
-            </div>
-          </div>
-        </div>
-
-        <nav aria-label="Site">
-          <a href="#about">About</a>
-          <a href="#research">Research</a>
-          <a href="#publications">Publications</a>
-          <a href="#teaching">Teaching</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </header>
-
-    <main id="content">
-      <section id="about">
-        <h2>About</h2>
-        <p class="muted">
-          Write 3–6 sentences about who you are, what you study, and your methods. Keep it human and specific.
+  <main id="top" class="wrap">
+    <!-- ABOUT -->
+    <section class="intro">
+      <img class="photo" src="images/headshot.jpg" alt="Elisa Todarello" width="600" height="600">
+      <div>
+        <h1>Elisa Todarello</h1>
+        <p class="position">
+          Postdoctoral Fellow, University of California, Berkeley<br>
+          Marie Skłodowska-Curie Fellow, University of Turin
         </p>
-      </section>
-
-      <section id="research">
-        <h2>Research</h2>
-        <div class="grid">
-          <div class="card col6">
-            <strong>Research Area / Project A</strong>
-            <div class="muted">2–4 lines: problem → approach → why it matters → (optional) key result.</div>
-          </div>
-          <div class="card col6">
-            <strong>Research Area / Project B</strong>
-            <div class="muted">2–4 lines.</div>
-          </div>
-          <div class="card col12">
-            <strong>Research Area / Project C (optional)</strong>
-            <div class="muted">1–3 lines.</div>
-          </div>
-        </div>
-      </section>
-
-      <section id="publications">
-        <h2>Selected publications</h2>
-        <ul>
-          <li><strong>Author, A.</strong> (Year). Paper title. <em>Venue</em>. <a href="#">PDF</a> · <a href="#">DOI</a> · <a href="#">Code</a></li>
-          <li><strong>Author, A.</strong> (Year). Paper title. <em>Venue</em>. <a href="#">PDF</a></li>
+        <p>
+          I am a theoretical physicist working at the interface of particle physics,
+          astrophysics and cosmology. My research focuses on axions and other ultralight
+          dark matter candidates: how they behave as dark matter, and how we can detect
+          them with telescopes, laboratory experiments and astrophysical observations.
+        </p>
+        <p>
+          Before Berkeley, I was a postdoc at the University of Nottingham, the University
+          of Turin and the Karlsruhe Institute of Technology. I received my PhD from the
+          University of Florida in 2018.
+        </p>
+        <ul class="links">
+          <li><a href="https://inspirehep.net/authors/1475415">INSPIRE</a></li>
+          <li><a href="https://orcid.org/0000-0001-7419-0976">ORCID</a></li>
+          <li><a href="https://github.com/elisabm99">GitHub</a></li>
         </ul>
-        <hr class="hr" />
-        <p class="muted">Tip: keep this list short (5–12). Link the rest on Google Scholar.</p>
-      </section>
+      </div>
+    </section>
 
-      <section id="teaching">
-        <h2>Teaching</h2>
-        <ul>
-          <li>Course Name (Term, Year) — Role</li>
-          <li>Course Name (Term, Year) — Role</li>
-        </ul>
-      </section>
+    <!-- RESEARCH -->
+    <!-- Each topic: a heading, one or two sentences, then links to the papers that define it. -->
+    <section id="research">
+      <h2>Research</h2>
+      <p class="vision">
+        Most of the matter in the Universe is invisible: we see its gravitational pull, but we
+        don't know what it is made of. A compelling possibility is the axion, a very light
+        particle originally proposed to solve a puzzle in the theory of the strong nuclear force.
+        If dark matter is made of axions or other ultralight particles, it should leave faint
+        fingerprints all around us: a dim spectral line from decaying axions, X-rays from the Sun,
+        tiny shifts in the orbits of satellites. I work out what these signals would look like,
+        and search for them in astronomical data.
+      </p>
+      <div class="topics">
+        <article class="topic">
+          <figure class="topic-fig">
+            <a href="images/research_decay.png"><img src="images/research_decay.png" alt="Figure: Upper bounds on axion decay from ultraviolet spectra taken by the Hubble Space Telescope (blue) and the International Ultraviolet Explorer (orange)" width="900" height="639" loading="lazy"></a>
+            <figcaption>Upper bounds on axion decay from ultraviolet spectra taken by the Hubble Space Telescope (blue) and the International Ultraviolet Explorer (orange). From JCAP 2026.</figcaption>
+          </figure>
+          <div class="topic-text">
+          <h3>Axion decay across the electromagnetic spectrum</h3>
+          <p>Axion dark matter can decay into two photons, producing a narrow spectral line.
+            I search for this line in astronomical data from radio to X-rays.</p>
+          <p class="key-papers">
+            <a href="https://arxiv.org/abs/2506.19962">Ultraviolet legacy data (JCAP 2026)</a> ·
+            <a href="https://arxiv.org/abs/2412.02543">Axions shining in the ultraviolet (JCAP 2025)</a> ·
+            <a href="https://arxiv.org/abs/2307.07403">MUSE-Faint dwarf galaxies (JCAP 2024)</a>
+          </p>
+          </div>
+        </article>
+        <article class="topic">
+          <figure class="topic-fig">
+            <a href="images/research_sun.png"><img src="images/research_sun.png" alt="Figure: Region of axion-photon coupling excluded by NuSTAR observations of the Sun (blue), compared with other searches" width="900" height="635" loading="lazy"></a>
+            <figcaption>Region of axion-photon coupling excluded by NuSTAR observations of the Sun (blue), compared with other searches. From PRL 2025.</figcaption>
+          </figure>
+          <div class="topic-text">
+          <h3>The Sun as an axion laboratory</h3>
+          <p>Axions produced in the solar core can convert into X-rays in the solar magnetic
+            field. With experimental colleagues, I used the NuSTAR X-ray telescope as an
+            axion helioscope.</p>
+          <p class="key-papers">
+            <a href="https://arxiv.org/abs/2407.03828">NuSTAR as an axion helioscope (PRL 2025)</a> ·
+            <a href="https://arxiv.org/abs/2605.26265">Axion-nucleon and axion-electron couplings (2026)</a> ·
+            <a href="https://arxiv.org/abs/2312.13984">The Sun as a dark matter target (PLB 2024)</a>
+          </p>
+          </div>
+        </article>
+        <article class="topic">
+          <figure class="topic-fig">
+            <a href="images/research_echo.png"><img src="images/research_echo.png" alt="Figure: Predicted radio echo from axion dark matter around four pulsars, at 400 MHz" width="900" height="746" loading="lazy"></a>
+            <figcaption>Predicted radio echo from axion dark matter around four pulsars, at 400 MHz. From JCAP 2024.</figcaption>
+          </figure>
+          <div class="topic-text">
+          <h3>Stimulated decay and the axion echo</h3>
+          <p>A large photon population stimulates axion decay: a powerful beam sent into the
+            dark matter halo returns a faint "echo". I study this effect for laboratory
+            searches and astrophysical sources.</p>
+          <p class="key-papers">
+            <a href="https://arxiv.org/abs/2610.07155">Coherent versus incoherent amplification (2026)</a> ·
+            <a href="https://arxiv.org/abs/2311.00051">Astrophysical echoes (JCAP 2024)</a> ·
+            <a href="https://arxiv.org/abs/2108.00195">Axion echo (PRD 2022)</a> ·
+            <a href="https://arxiv.org/abs/2004.01669">How to suppress exponential growth (JCAP 2020)</a>
+          </p>
+          </div>
+        </article>
+        <article class="topic">
+          <figure class="topic-fig">
+            <a href="images/research_quadratic.png"><img src="images/research_quadratic.png" alt="Figure: The dark matter field inside long (top) and short (bottom) laboratory cavities" width="900" height="415" loading="lazy"></a>
+            <figcaption>The dark matter field inside long (top) and short (bottom) laboratory cavities. From PRD 2026.</figcaption>
+          </figure>
+          <div class="topic-text">
+          <h3>Quadratically coupled ultralight dark matter</h3>
+          <p>Dark matter that couples quadratically to ordinary matter is screened or amplified
+            by surrounding matter. I study how this affects searches, from laboratory cavities to satellite orbits around Earth.</p>
+          <p class="key-papers">
+            <a href="https://arxiv.org/abs/2605.28248">LAGEOS II pericentre precession (2026)</a> ·
+            <a href="https://arxiv.org/abs/2507.16526">Impact of cavities (PRD 2026)</a>
+          </p>
+          </div>
+        </article>
+        <article class="topic">
+          <figure class="topic-fig">
+            <a href="images/research_wave.png"><img src="images/research_wave.png" alt="Figure: Probability that an axion minicluster near the Sun survives after 2.5, 5 and 10 billion years" width="900" height="315" loading="lazy"></a>
+            <figcaption>Probability that an axion minicluster near the Sun survives after 2.5, 5 and 10 billion years. From JCAP 2022 (figure by Virgile Dandoy).</figcaption>
+          </figure>
+          <div class="topic-text">
+          <h3>The wave nature of axion dark matter</h3>
+          <p>Axion dark matter is a highly degenerate quantum field. I have studied when it is
+            described by a classical field, its gravitational self-interactions, and the
+            survival of axion miniclusters in the galaxy.</p>
+          <p class="key-papers">
+            <a href="https://arxiv.org/abs/2206.04619">Axion miniclusters (JCAP 2022)</a> ·
+            <a href="https://arxiv.org/abs/1710.02195">Gravitational self-interactions (PRD 2018)</a> ·
+            <a href="https://arxiv.org/abs/1607.00949">Duration of classicality (PLB 2017)</a>
+          </p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:you@university.edu">you@university.edu</a></p>
-        <p class="muted">Office: Building, Room · City, Country</p>
-      </section>
+    <!-- PUBLICATIONS -->
+    <!-- To add a paper: copy one <li>...</li> block and paste it at the top of the right list. -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <p class="note">
+        Full, always up-to-date list on <a href="https://inspirehep.net/authors/1475415">INSPIRE</a>.
+      </p>
 
-      <footer>
-        <hr class="hr" />
-        © <span id="y"></span> Your Name
-      </footer>
-    </main>
-  </div>
+      <h3 class="pub-group">Preprints</h3>
+      <ol class="pubs">
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2610.07155">Coherent versus incoherent amplification: from parametric resonance to the kinetic regime in stimulated axion decay</a>
+          <span class="pub-authors">C. Smarra, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://arxiv.org/abs/2610.07155">arXiv:2610.07155</a> (2026)</span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2605.28248">Using the pericentre precession of LAGEOS II to constrain quadratically coupled ultralight dark matter</a>
+          <span class="pub-authors">C. Burrage, A. Macdonald, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://arxiv.org/abs/2605.28248">arXiv:2605.28248</a> (2026)</span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2605.26265">NuSTAR as an axion helioscope: probing axion-nucleon and axion-electron couplings</a>
+          <span class="pub-authors">T. Zanzarella, F. R. Candón, M. Giannotti, M. Regis, J. Ruz, M. Taoso, <strong>E. Todarello</strong>, J. K. Vogel</span>
+          <span class="pub-venue"><a href="https://arxiv.org/abs/2605.26265">arXiv:2605.26265</a> (2026)</span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2401.16909">Comment on "Axion electrodynamics in the presence of current sources"</a>
+          <span class="pub-authors">T. Schwetz, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://arxiv.org/abs/2401.16909">arXiv:2401.16909</a> (2024)</span>
+        </li>
+      </ol>
+
+      <h3 class="pub-group">Journal articles</h3>
+      <ol class="pubs">
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2507.16526">Impact of cavities on the detection of quadratically coupled ultralight dark matter</a>
+          <span class="pub-authors">C. Burrage, A. Macdonald, M. P. Ross, G. Rybka, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1103/bml1-j932">Phys. Rev. D 113, 063505 (2026)</a> · <a href="https://arxiv.org/abs/2507.16526">arXiv:2507.16526</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2506.19962">New bounds on axion-like particles in the ultraviolet from legacy data</a>
+          <span class="pub-authors"><strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2026/04/063">JCAP 04 (2026) 063</a> · <a href="https://arxiv.org/abs/2506.19962">arXiv:2506.19962</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2412.02543">Bounds on axion-like particles shining in the ultraviolet</a>
+          <span class="pub-authors"><strong>E. Todarello</strong>, M. Regis</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2025/05/070">JCAP 05 (2025) 070</a> · <a href="https://arxiv.org/abs/2412.02543">arXiv:2412.02543</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2407.03828">NuSTAR as an axion helioscope</a>
+          <span class="pub-authors">J. Ruz, <strong>E. Todarello</strong>, J. K. Vogel, M. Giannotti, B. Grefenstette, H. S. Hudson, I. G. Hannah, I. G. Irastorza, C. S. Kim, T. O'Shea, M. Regis, D. M. Smith, M. Taoso, J. Trujillo Bueno</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1103/18sn-hxtb">Phys. Rev. Lett. 135, 141001 (2025)</a> · <a href="https://arxiv.org/abs/2407.03828">arXiv:2407.03828</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2312.13984">The Sun as a target for axion dark matter detection</a>
+          <span class="pub-authors"><strong>E. Todarello</strong>, M. Regis, M. Taoso, M. Giannotti, J. Ruz, J. K. Vogel</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1016/j.physletb.2024.138752">Phys. Lett. B 854, 138752 (2024)</a> · <a href="https://arxiv.org/abs/2312.13984">arXiv:2312.13984</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2311.17641">Constraints on the origin of the radio synchrotron background via angular correlations</a>
+          <span class="pub-authors"><strong>E. Todarello</strong>, M. Regis, F. Bianchini, J. Singal, E. Branchini, F. J. Cowie, S. Heston, S. Horiuchi, D. Lucero, A. Offringa</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1093/mnras/stae876">MNRAS 530, 2994 (2024)</a> · <a href="https://arxiv.org/abs/2311.17641">arXiv:2311.17641</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2311.00051">Anatomy of astrophysical echoes from axion dark matter</a>
+          <span class="pub-authors"><strong>E. Todarello</strong>, F. Calore, M. Regis</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2024/05/040">JCAP 05 (2024) 040</a> · <a href="https://arxiv.org/abs/2311.00051">arXiv:2311.00051</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2307.07403">Robust bounds on ALP dark matter from dwarf spheroidal galaxies in the optical MUSE-Faint survey</a>
+          <span class="pub-authors"><strong>E. Todarello</strong>, M. Regis, J. Reynoso-Cordova, M. Taoso, D. Vaz, J. Brinchmann, M. Steinmetz, S. L. Zoutendijk</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2024/05/043">JCAP 05 (2024) 043</a> · <a href="https://arxiv.org/abs/2307.07403">arXiv:2307.07403</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2306.15720">Constraining below-threshold radio source counts with machine learning</a>
+          <span class="pub-authors"><strong>E. Todarello</strong>, A. Scaffidi, M. Regis, M. Taoso</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2024/01/062">JCAP 01 (2024) 062</a> · <a href="https://arxiv.org/abs/2306.15720">arXiv:2306.15720</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2206.04619">A self-consistent wave description of axion miniclusters and their survival in the galaxy</a>
+          <span class="pub-authors">V. Dandoy, T. Schwetz, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2022/09/081">JCAP 09 (2022) 081</a> · <a href="https://arxiv.org/abs/2206.04619">arXiv:2206.04619</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2108.00195">Axion dark matter echo: a detailed analysis</a>
+          <span class="pub-authors">A. Arza, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1103/PhysRevD.105.023023">Phys. Rev. D 105, 023023 (2022)</a> · <a href="https://arxiv.org/abs/2108.00195">arXiv:2108.00195</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://doi.org/10.3390/sym13112150">The echo method for axion dark matter detection</a>
+          <span class="pub-authors">A. Arza, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.3390/sym13112150">Symmetry 13, 2150 (2021)</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2004.01669">How to suppress exponential growth — on the parametric resonance of photons in an axion background</a>
+          <span class="pub-authors">A. Arza, T. Schwetz, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2020/10/013">JCAP 10 (2020) 013</a> · <a href="https://arxiv.org/abs/2004.01669">arXiv:2004.01669</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1907.04941">Duration of classicality of an inhomogeneous quantum field with repulsive contact self-interactions</a>
+          <span class="pub-authors">A. Arza, S. Chakrabarty, S. Enomoto, Y. Han, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1103/PhysRevD.100.125010">Phys. Rev. D 100, 125010 (2019)</a> · <a href="https://arxiv.org/abs/1907.04941">arXiv:1907.04941</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1812.05487">Axion-electrodynamics: a quantum field calculation</a>
+          <span class="pub-authors">M. Beutter, A. Pargner, T. Schwetz, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2019/02/026">JCAP 02 (2019) 026</a> · <a href="https://arxiv.org/abs/1812.05487">arXiv:1812.05487</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1710.02195">Gravitational self-interactions of a degenerate quantum scalar field</a>
+          <span class="pub-authors">S. Chakrabarty, S. Enomoto, Y. Han, P. Sikivie, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1103/PhysRevD.97.043531">Phys. Rev. D 97, 043531 (2018)</a> · <a href="https://arxiv.org/abs/1710.02195">arXiv:1710.02195</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1701.04573">New astrophysical bounds on ultralight axion-like particles</a>
+          <span class="pub-authors">N. Banik, A. J. Christopherson, P. Sikivie, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1103/PhysRevD.95.043542">Phys. Rev. D 95, 043542 (2017)</a> · <a href="https://arxiv.org/abs/1701.04573">arXiv:1701.04573</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1607.00949">Duration of classicality in highly degenerate interacting bosonic systems</a>
+          <span class="pub-authors">P. Sikivie, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1016/j.physletb.2017.04.069">Phys. Lett. B 770, 331 (2017)</a> · <a href="https://arxiv.org/abs/1607.00949">arXiv:1607.00949</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1504.05968">Linear Newtonian perturbation theory from the Schrödinger-Poisson equations</a>
+          <span class="pub-authors">N. Banik, A. J. Christopherson, P. Sikivie, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1103/PhysRevD.91.123540">Phys. Rev. D 91, 123540 (2015)</a> · <a href="https://arxiv.org/abs/1504.05968">arXiv:1504.05968</a></span>
+        </li>
+      </ol>
+
+      <h3 class="pub-group">Reviews, white papers and community reports</h3>
+      <ol class="pubs">
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2606.25537">Probing the fundamental nature of particle dark matter</a>
+          <span class="pub-authors">M. Regis, A. Basu, G. Beck, G. Bernardi, P. Marchegiani, D. J. Schwarz, M. Taoso, <strong>E. Todarello</strong>, E. Tolley, C. Uhlemann</span>
+          <span class="pub-venue">Chapter in <em>Advancing Astrophysics with the SKA II</em> (2026) · <a href="https://arxiv.org/abs/2606.25537">arXiv:2606.25537</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2603.18167">Axions at the meV crossroads: theory, cosmology, astrophysics, and experiments</a>
+          <span class="pub-authors">M. Cicoli et al. (incl. <strong>E. Todarello</strong>, editorial team)</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1475-7516/2026/07/060">JCAP 07 (2026) 060</a> · <a href="https://arxiv.org/abs/2603.18167">arXiv:2603.18167</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2603.03433">The COSMIC WISPers white paper: the physics case for weakly interacting slim particles</a>
+          <span class="pub-authors">A. Arza et al. (incl. <strong>E. Todarello</strong>, editorial team)</span>
+          <span class="pub-venue"><a href="https://arxiv.org/abs/2603.03433">arXiv:2603.03433</a> (2026)</span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2503.20432">Exploring the dark universe: a European strategy for axions and other WISPs discovery</a>
+          <span class="pub-authors">S. Aybas et al. (incl. <strong>E. Todarello</strong>)</span>
+          <span class="pub-venue"><a href="https://arxiv.org/abs/2503.20432">arXiv:2503.20432</a> (2025)</span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2211.16547">The Second Radio Synchrotron Background Workshop: conference summary and report</a>
+          <span class="pub-authors">J. Singal et al. (incl. <strong>E. Todarello</strong>)</span>
+          <span class="pub-venue"><a href="https://doi.org/10.1088/1538-3873/acbdbf">Publ. Astron. Soc. Pac. 135, 036001 (2023)</a> · <a href="https://arxiv.org/abs/2211.16547">arXiv:2211.16547</a></span>
+        </li>
+      </ol>
+
+      <h3 class="pub-group">Conference proceedings</h3>
+      <ol class="pubs">
+        <li>
+          <a class="pub-title" href="https://doi.org/10.22323/1.507.0014">Impact of cavities on the detection of quadratically coupled ultralight dark matter</a>
+          <span class="pub-authors">C. Burrage, A. Macdonald, M. P. Ross, G. Rybka, <strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.22323/1.507.0014">PoS COSMICWISPers2025, 014</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2501.15960">Axion-like particle conversion in the solar magnetic field</a>
+          <span class="pub-authors"><strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.22323/1.474.0030">PoS COSMICWISPers2024, 030 (2025)</a> · <a href="https://arxiv.org/abs/2501.15960">arXiv:2501.15960</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/2310.01996">Updated bounds on axion-like particle dark matter with the optical MUSE-Faint survey</a>
+          <span class="pub-authors"><strong>E. Todarello</strong></span>
+          <span class="pub-venue"><a href="https://doi.org/10.1002/andp.202300042">Annalen der Physik 536, 2300042 (2024)</a> · <a href="https://arxiv.org/abs/2310.01996">arXiv:2310.01996</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1712.08219">Duration of classicality of homogeneous condensates with attractive interactions</a>
+          <span class="pub-authors">S. Chakrabarty, S. Enomoto, Y. Han, P. Sikivie, <strong>E. M. Todarello</strong></span>
+          <span class="pub-venue">13th Patras Workshop on Axions, WIMPs and WISPs (2017) · <a href="https://arxiv.org/abs/1712.08219">arXiv:1712.08219</a></span>
+        </li>
+        <li>
+          <a class="pub-title" href="https://arxiv.org/abs/1509.02081">The rethermalizing Bose-Einstein condensate of dark matter axions</a>
+          <span class="pub-authors">N. Banik, A. Christopherson, P. Sikivie, <strong>E. M. Todarello</strong></span>
+          <span class="pub-venue">11th Patras Workshop on Axions, WIMPs and WISPs (2015) · <a href="https://arxiv.org/abs/1509.02081">arXiv:1509.02081</a></span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- TALKS -->
+    <section id="talks">
+      <h2>Recent talks</h2>
+      <p class="note">Full list: <a href="talks.pdf">talks (PDF)</a>.</p>
+      <ul class="talks">
+        <li><span class="date">2026</span><span><em>Searching for axion dark matter decaying into photons: from radio to X-rays</em><br>SLAC Theory Group Seminar, Menlo Park (CA), USA <span class="tag">seminar</span></span></li>
+        <li><span class="date">2026</span><span><em>Searching for axion dark matter decaying into photons: from radio to X-rays</em><br>SCIPP Seminar, UC Santa Cruz, USA <span class="tag">seminar</span></span></li>
+        <li><span class="date">2026</span><span><em>Searching for axions with telescopes</em><br><a href="https://agenda.infn.it/event/49777/overview">4th Training School, COST Action COSMIC WISPers</a>, Corfu, Greece <span class="tag">lectures</span></span></li>
+        <li><span class="date">2025</span><span><em>Searching for axion decay in the radio band</em><br><a href="https://indico.cern.ch/event/1546907/">1st UNDARK Workshop</a>, La Laguna, Spain <span class="tag">invited</span></span></li>
+        <li><span class="date">2025</span><span><em>NuSTAR as an axion helioscope</em><br><a href="https://indico.mitp.uni-mainz.de/event/407/contributions/5611/">Windows into New Physics in the Sky</a>, Mainz, Germany <span class="tag">invited</span></span></li>
+        <li><span class="date">2025</span><span><em>An overview of astrophysical searches for axion decay into photons: from radio to X-rays</em><br><a href="https://indico.fysik.su.se/event/8808/contributions/14349/">Axions in Stockholm</a>, Stockholm, Sweden <span class="tag">invited</span></span></li>
+        <li><span class="date">2025</span><span><em>Seeking the elusive axion decay into photons</em><br><a href="https://indico.global/event/13909/contributions/127059/">Round Table on New Avenues in Particle Cosmology</a>, Winchester, UK <span class="tag">invited</span></span></li>
+        <li><span class="date">2025</span><span><em>An overview of axion dark matter</em><br>Particle Cosmology and Gravity Seminar, University of Nottingham, UK <span class="tag">seminar</span></span></li>
+        <li><span class="date">2024</span><span><em>Axion conversion in the solar magnetic field</em><br><a href="https://agenda.infn.it/event/39939/contributions/222831/">2nd General Meeting, COST Action COSMIC WISPers</a>, Istanbul, Türkiye <span class="tag">invited</span></span></li>
+        <li><span class="date">2024</span><span><em>NuSTAR as an axion helioscope</em><br><a href="https://agenda.infn.it/event/40078/contributions/240707/">19th Patras Workshop on Axions, WIMPs and WISPs</a>, Patras, Greece</span></li>
+        <li><span class="date">2024</span><span><em>Decay signatures of axion dark matter</em><br><a href="https://agenda.infn.it/event/39100/contributions/218955/">Barolo Astroparticle Meeting</a>, Barolo, Italy <span class="tag">invited</span></span></li>
+        <li><span class="date">2024</span><span><em>Phenomenology of axion decay into photons</em><br><a href="https://indico.cern.ch/event/1381382/contributions/5921717/">Axions 2024</a>, University of Florida, Gainesville (FL), USA <span class="tag">invited</span></span></li>
+      </ul>
+    </section>
+
+    <!-- OUTREACH -->
+    <section id="outreach">
+      <h2>Outreach</h2>
+      <ul class="talks">
+        <li><span class="date">2025</span><span><a href="https://physics.aps.org/articles/v18/29">Detecting axion-like dark matter with the JWST</a><br>Invited Viewpoint, <em>Physics</em> magazine (American Physical Society)</span></li>
+        <li><span class="date">2023</span><span><a href="https://www.advancedsciencenews.com/could-axions-be-the-missing-piece-in-the-dark-matter-puzzle/">Could axions be the missing piece in the dark matter puzzle?</a><br>Interview, <em>Advanced Science News</em></span></li>
+      </ul>
+    </section>
+
+    <!-- OUTSIDE PHYSICS -->
+    <!-- To use the other cat photo, change cats_a.jpg to cats_b.jpg. -->
+    <section id="outside">
+      <h2>Outside physics</h2>
+      <p>I sing in choirs. I now sing with the
+        <a href="https://bcco.org/">Berkeley Community Chorus and Orchestra</a>.
+        In Nottingham I sang with the Nottingham Festival Chorus and the
+        University of Nottingham Choir:</p>
+      <ul class="talks">
+        <li><span class="date">2025</span><span><a href="https://www.lakesidearts.org.uk/event/university-choir-chamber-choir-2025/">Britten, <em>Rejoice in the Lamb</em> and <em>Hymn to St Cecilia</em>, with British choral music from Purcell to Judith Bingham</a><br>University of Nottingham Choir and Chamber Choir, Great Hall, Trent Building, Nottingham</span></li>
+        <li><span class="date">2025</span><span><a href="https://www.lakesidearts.org.uk/event/university-choir-chamber-choir-2/">Will Todd, <em>Mass in Blue</em></a><br>University of Nottingham Choir and Chamber Choir, Great Hall, Trent Building, Nottingham</span></li>
+        <li><span class="date">2025</span><span><a href="https://www.visit-nottinghamshire.co.uk/whats-on/the-singing-bride-concert-p999401">Mozart, <em>Mass in C minor</em></a><br>Nottingham Festival Chorus, Nottingham Concert Orchestra, Albert Hall, Nottingham</span></li>
+        <li><span class="date">2024</span><span><a href="https://www.lakesidearts.org.uk/news/universities-for-nottingham-bbc-concert-orchestra-at-the-royal-concert-hall/">Orff, <em>Carmina Burana</em></a><br>University of Nottingham and Nottingham Trent University choirs, BBC Concert Orchestra, Royal Concert Hall, Nottingham</span></li>
+      </ul>
+      <figure class="wide-photo">
+        <img src="images/choir_mozart.jpg" alt="Choir and orchestra performing on stage at the Albert Hall, Nottingham" width="1080" height="566" loading="lazy">
+        <figcaption>Mozart's Mass in C minor with the Nottingham Festival Chorus, Albert Hall, Nottingham, February 2025.</figcaption>
+      </figure>
+      <figure class="aside-photo">
+        <img src="images/cats_a.jpg" alt="Elisa holding a tabby kitten in a fluffy pink blanket" width="1000" height="957" loading="lazy">
+        <figcaption>Away from axions: making friends at a cat café.</figcaption>
+      </figure>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        <span class="label">Email</span>
+        <!-- The address is assembled by the script below so simple spam bots can't read it. -->
+        <a id="email" href="#contact">elisa.todarello [at] berkeley [dot] edu</a><br>
+        <span class="label">GitHub</span> <a href="https://github.com/elisabm99">elisabm99</a><br>
+        <span class="label">Address</span> Department of Physics, University of California, Berkeley, CA, USA
+      </p>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p>© 2026 Elisa Todarello · Last updated October 2026</p>
+  </footer>
 
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    (function () {
+      var a = document.getElementById('email');
+      var addr = ['elisa.todarello', 'berkeley.edu'].join('@');
+      a.href = 'mailto:' + addr;
+      a.textContent = addr;
+    })();
   </script>
 </body>
 </html>
